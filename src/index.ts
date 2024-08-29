@@ -12,7 +12,6 @@ client.commands = new Collection<string,Command>()
 const commandsToRegister = Object.entries(commands).map((command) => command);
 
 commandsToRegister.forEach(command=>{
-	console.log('command',command);
 	client.commands.set(command[0],command[1])
 })
 

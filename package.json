@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "start": "node build/index.js",
-    "deploy:commands": "node build/deployCommandsOnce.cjs",
+    "deploy:commands": "node build/utils/deployCommandsOnce.js",
     "build": "tsup src --out-dir build"
   },
   "keywords": [],

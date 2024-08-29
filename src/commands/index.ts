@@ -1,5 +1,9 @@
-import helloWord from "./helloWord";
+import race from "./race";
+import listraces from "./listraces";
+import monk from "./monk";
 
 export default {
-  helloWord
+  listraces,
+  race,
+  monk
 };
