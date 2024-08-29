@@ -1,0 +1,27 @@
+{
+  "name": "rpgtools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node build/index.js",
+    "deploy:commands": "node build/deployCommandsOnce.cjs",
+    "build": "tsup src --out-dir build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.5.1",
+    "tsup": "^8.2.4",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "discord-api-types": "^0.37.98",
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "tsc": "^2.0.4"
+  }
+}
