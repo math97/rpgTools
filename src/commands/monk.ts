@@ -3,6 +3,7 @@ import { CommandInteraction, EmbedBuilder, InteractionResponse, SlashCommandBuil
 
 const monk = {
     className: "Monk",
+    image:'https://cdn.discordapp.com/attachments/1279212787372916817/1279212811590832260/881e2715-41e4-47ce-b7e2-2a3421b07df7.png?ex=66d39f44&is=66d24dc4&hm=0e035bf740caf980f49f7cbedfe90bb3f65768510a1da8ee6ea76990354dbba0&',
     baseStats: {
         lifeDice: "1d8",
         proficiencies: ["Simple Weapons", "Shortswords"],
@@ -45,11 +46,12 @@ const monk = {
 
 
 
-const buildEmbed = ():EmbedBuilder=>{
-    const raceEmbed = new EmbedBuilder()
+const buildEmbed = ():EmbedBuilder[]=>{
+    const classEmbed = new EmbedBuilder()
         .setColor("Orange")
         .setTitle(monk.className)
         .setDescription(`Characteristics of class ${monk.className}`)
+        .setThumbnail(monk.image)
         .addFields(
             { name: 'Life Dice', value: monk.baseStats.lifeDice, inline: true },
             { name: 'Proficiencies', value: monk.baseStats.proficiencies.join('\n'), inline: true },
@@ -60,7 +62,19 @@ const buildEmbed = ():EmbedBuilder=>{
             { name: 'Armor', value: monk.baseStats.armor || 'None', inline: true }
         )
 
-    return raceEmbed
+    const levelEmbed = new EmbedBuilder()
+        .setColor("Orange")
+        .setTitle("Monk Levels")
+        .setDescription("Level features of the Monk class")
+        .addFields(
+            ...monk.levels.map(level => ({
+                name: `Level ${level.level}`,
+                value: level.features.join(", "),
+                inline: true
+            }))
+        );
+
+    return [classEmbed, levelEmbed]
 }
 
 export default {
@@ -68,7 +82,7 @@ export default {
         .setName("monk")
         .setDescription("Replies with data from monk class from D&D 5e!"),
     execute: async (interaction: CommandInteraction): Promise<InteractionResponse | void> => {
-        const embedMonk = buildEmbed()
-        return interaction.reply({embeds:[embedMonk]});
+        const embeds = buildEmbed()
+        return interaction.reply({embeds});
     }
 } as Command
