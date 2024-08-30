@@ -14,9 +14,24 @@ This bot application is designed to provide quick access to all the terms and ru
 3. Start using the bot by typing commands in the designated channel.
 4. Explore the vast database of D&D 5e terms and rules, and enjoy a seamless gaming experience.
 
+
+## How to run Local
+
+1. Invite the bot to your Discord server by following the provided link.
+2. Grant necessary permissions to the bot to ensure it can function properly.
+3. Add env
+4. Run command "build"
+5. Run the command "deploy:commands"
+6. Run npm dev
+
+Notice that steps 4,5 are necessary just when you need to register a new command for the bot
+
+
 ## Development Tasks
 
 Here are some tasks that need to be completed for the development of this bot:
+Notices:
+    - [ ] We are using conventional commits
 
 ### MVP
 - [ ] Implement a command to display the list of available spells.
