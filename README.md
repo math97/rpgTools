@@ -56,6 +56,9 @@ Here are some tasks that need to be completed for the development of this bot:
     - [ ] d20
     - [ ] d100
 - [ ] add response for based locale as ["pt-Br","en-US"]
+- [ ] Improve folder structure pattern
+- [ ] Improve types and functions
+- [ ] Add test's
 
 ### Future Enhancements
 
