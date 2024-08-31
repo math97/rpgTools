@@ -31,6 +31,9 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 
 	const command = client.commands.get(interaction.commandName)
+	// console.log(interaction.commandName)
+	// console.log(client.commands)
+	console.log(command)
 
 	if(!command){
 		console.error("Command not found")
@@ -40,7 +43,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	try {
 		await command.execute(interaction)
 	} catch (error) {
-		console.error(`Failed command ${command} with error: ${error}`)
+		console.error(`Failed command ${command.commandName} with error: ${error}`)
 		await interaction.reply(`There was an error executin command: ${command.commandName}`)
 	}
 })

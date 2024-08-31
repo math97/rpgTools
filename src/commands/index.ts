@@ -1,9 +1,9 @@
-import race from "./race";
-import listraces from "./listraces";
-import monk from "./monk";
+import race from "./race"
+import listraces from "./listraces"
+import classes from "./classes/index" 
 
 export default {
   listraces,
   race,
-  monk
+  ...classes
 };

@@ -36,7 +36,7 @@ Notices:
 ### MVP
 - [ ] Implement a command to display the list of available spells.
 - [ ] Implement a command to display the data from all default class on players handbook:
-    - [ ] Bard
+    - [X] Bard
     - [ ] Barbarian
     - [ ] Warlock
     - [ ] Cleric
