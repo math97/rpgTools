@@ -7,13 +7,16 @@
     "dev": "tsx watch src/index.ts",
     "start": "node build/index.js",
     "deploy:commands": "node build/utils/deployCommandsOnce.js",
-    "build": "tsup src --out-dir build"
+    "build": "tsup src --out-dir build",
+    "lint": "eslint src --ext .ts --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@rocketseat/eslint-config": "^2.2.2",
     "@types/node": "^22.5.1",
+    "eslint": "^8.57.0",
     "tsup": "^8.2.4",
     "tsx": "^4.19.0",
     "typescript": "^5.5.4"

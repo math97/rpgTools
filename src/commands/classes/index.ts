@@ -1,8 +1,7 @@
-import bard from "./bard";
-import monk from "./monk";
-
+import bard from './bard'
+import monk from './monk'
 
 export default {
-    monk,
-    bard
-  };
+  monk,
+  bard,
+}

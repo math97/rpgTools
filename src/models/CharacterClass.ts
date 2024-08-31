@@ -1,0 +1,36 @@
+export interface CharacterClass {
+  className: string
+  image: string
+  baseStats: {
+    lifeDice: string
+    proficiencies: string[]
+    modify: string
+    expertise: string[]
+    expertiseChoices: number
+    savingThrows: string[]
+    armor?: string
+  }
+  levels: {
+    level: number
+    features: string[]
+  }[]
+}
+
+export interface monkClass extends CharacterClass {
+  levels: {
+    level: number
+    features: string[]
+    martialArtsDice: string
+    chiPoints: number
+  }[]
+}
+
+export interface bardClass extends CharacterClass {
+  levels: {
+    level: number
+    features: string[]
+    spellSlots: {
+      [key: number]: number
+    }
+  }[]
+}
