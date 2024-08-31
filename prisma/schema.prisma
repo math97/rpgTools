@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model AbilityScore {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  type   String
+  value  Int
+  Race   Race?   @relation(fields: [raceId], references: [id])
+  raceId String? @db.ObjectId
+}
+
+model Race {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  name          String         @unique
+  abilityScore  AbilityScore[]
+  traits        String[]
+  languages     String[]
+  proficiencies Int
+}
+
+model Levels {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  level           Int
+  proficiency     Int
+  features        String[]
+  spellSlots      Int[]
+  cantrips        Int[]
+  martialArtsDice String
+  ki              Int?
+  fury            Int?
+  furyDamage      Int?
+}
+
+model Role {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  image         String
+  className     String   @unique
+  hitDie        Int
+  proficiencies String[]
+  savingThrows  String[]
+  skills        String[]
+}
