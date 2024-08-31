@@ -8,6 +8,7 @@
     "start": "node build/index.js",
     "deploy:commands": "node build/utils/deployCommandsOnce.js",
     "build": "tsup src --out-dir build",
+    "restart": "npm run build && npm run deploy:commands",
     "lint": "eslint src --ext .ts --fix"
   },
   "keywords": [],
