@@ -1,4 +1,9 @@
-import { barbarianClass, CharacterClass } from '@/models/CharacterClass'
+import {
+  AnyCharacterClass,
+  barbarianClass,
+  CharacterClass,
+  monkClass,
+} from '@/models/CharacterClass'
 import { buildEmbedClass } from '@/utils/buildClassEmbed'
 
 import { role } from '@/data/roles'
@@ -7,53 +12,57 @@ import {
   EmbedBuilder,
   InteractionResponse,
   SlashCommandBuilder,
+  SlashCommandOptionsOnlyBuilder,
 } from 'discord.js'
-import { commandClass } from '../command.class'
-import { Command } from '@/models/Command'
+import { Command as CommandType } from '@/models/Command'
+import { Command } from '.'
 
-export class RoleCommand extends commandClass<string> {
-  private data: CharacterClass | barbarianClass
-  constructor(info: string) {
-    super(info)
-    this.data = role.getRole(info) as CharacterClass | barbarianClass
+export class RoleCommand extends Command<string> {
+  protected data: AnyCharacterClass | undefined
+  protected name: string
+  constructor(name: string) {
+    super(name)
+    this.name = name
   }
 
   public buildEmbed(): EmbedBuilder[] {
-    const classEmbed = buildEmbedClass(this.data)
+    const classEmbed = buildEmbedClass(this.data as CharacterClass)
 
-    const levelEmbed = new EmbedBuilder()
-      .setColor('Orange')
-      .setTitle(`${this.data.className}' Levels`)
-      .setDescription(`Levels and features`)
-      .addFields(
-        ...this.data.levels.map((level) => ({
-          name: `Level ${level.level}`,
-          value: level.features.join(', '),
-          inline: true,
-        })),
-      )
-
-    return [classEmbed, levelEmbed]
+    return [classEmbed]
   }
 
-  public buildCommand(): Command {
+  public buildCommand(): CommandType {
     return {
-      name: this.data?.className.toLowerCase(),
+      name: this.name.toLowerCase(),
       data: this.command(),
       execute: async (
         interaction: CommandInteraction,
       ): Promise<InteractionResponse | void> => {
-        const embeds = this.buildEmbed()
-        return interaction.reply({ embeds })
+        const option = interaction.options.get('filter')?.value
+
+        const data =
+          role.rolesOption.find((role) => role.name.toLowerCase() === option) ||
+          null
+
+        if (!data) return interaction.reply(`Role not found`)
+
+        this.data = role.getRole(data.name) as AnyCharacterClass
+        
+        return interaction.reply({ embeds: this.buildEmbed() })
       },
     }
   }
 
-  private command(): SlashCommandBuilder {
+  private command(): SlashCommandOptionsOnlyBuilder {
     return new SlashCommandBuilder()
-      .setName(this.data?.className.toLowerCase())
-      .setDescription(
-        `Replies with data from ${this.data.className} class from D&D 5e!`,
+      .setName(this.name.toLowerCase())
+      .setDescription('Replies with roles from D&D 5e!')
+      .addStringOption((option) =>
+        option
+          .setName('filter')
+          .setDescription('Filter roles by name')
+          .setRequired(true)
+          .addChoices(role.rolesOption),
       )
   }
 }
