@@ -38,7 +38,7 @@ export class roleCommand extends commandClass<string> {
 
     public buildCommand(): Command {
         return {
-            name: this.data.className.toLowerCase(),
+            name: this.data?.className.toLowerCase(),
             data: this.command(),
             execute: async (
                 interaction: CommandInteraction,
@@ -51,9 +51,8 @@ export class roleCommand extends commandClass<string> {
 
     private command(): SlashCommandBuilder {
         return new SlashCommandBuilder()
-            .setName(this.data.className.toLowerCase())
+            .setName(this.data?.className.toLowerCase())
             .setDescription(
-                // `Replies with data from ${this.data.className} class from D&D 5e!`);
                 `Replies with data from ${this.data.className} class from D&D 5e!`);
     }
 }

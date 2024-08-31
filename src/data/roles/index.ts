@@ -11,6 +11,7 @@ export class role {
     public static getRole(role: string) {
         switch (role) {
             case "Barbarian":
+            case "barbarian":
                 return barbarian;
             default:
                 return null;
