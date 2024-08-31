@@ -1,6 +1,6 @@
 import options from '@/data/races/index'
 import { Race } from '@/data/races/races.interface'
-import { Command } from '@/models/Command'
+import { Command as CommandType } from '@/models/Command'
 import {
   CommandInteraction,
   EmbedBuilder,
@@ -8,19 +8,19 @@ import {
   SlashCommandBuilder,
   SlashCommandOptionsOnlyBuilder,
 } from 'discord.js'
-import { commandClass } from '../command.class'
-export class RaceCommand extends commandClass<string> {
-  private data: Race
-  private name: string = 'Race'
-  constructor(info: string) {
-    super(info)
+import { Command } from '.'
+export class RaceCommand extends Command<string> {
+  protected data: Race
+  constructor(name: string) {
+    super(name)
+    this.name = name ?? 'Race'
     this.data = {} as Race
   }
 
   public buildEmbed(): EmbedBuilder[] {
     const raceEmbed = new EmbedBuilder()
       .setColor('Orange')
-      .setTitle(this.name)
+      .setTitle(this.data.name)
       .setDescription(`Characteristics of race ${this.data.name}`)
       .addFields(
         { name: '\u200B', value: '\u200B' },
@@ -41,9 +41,9 @@ export class RaceCommand extends commandClass<string> {
     return [raceEmbed]
   }
 
-  public buildCommand(): Command {
+  public buildCommand(): CommandType {
     return {
-      name: this.name.toLowerCase(),
+      name: this.name?.toLowerCase() ?? '',
       data: this.command(),
       execute: async (
         interaction: CommandInteraction,
@@ -64,7 +64,7 @@ export class RaceCommand extends commandClass<string> {
 
   private command(): SlashCommandOptionsOnlyBuilder {
     return new SlashCommandBuilder()
-      .setName('race')
+      .setName(this.name?.toLowerCase() ?? '')
       .setDescription('Replies with races from D&D 5e!')
       .addStringOption((option) =>
         option
