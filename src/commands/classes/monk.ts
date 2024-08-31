@@ -157,7 +157,7 @@ const buildEmbed = (): EmbedBuilder[] => {
 
   const levelEmbed = new EmbedBuilder()
     .setColor('Orange')
-    .setTitle('Monk Levels')
+    .setTitle('Monk Levelssssss')
     .setDescription('Level features of the Monk class')
     .addFields(
       ...monk.levels.map((level) => ({
