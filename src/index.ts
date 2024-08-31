@@ -9,6 +9,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 client.commands = new Collection<string, Command>()
   
 import listCommands from './discord/listCommands'
+console.log(listCommands);
 listCommands.forEach((command) => {
   client.commands.set(command.name, command)
 })
@@ -29,7 +30,6 @@ client.on(Events.InteractionCreate, async (interaction: Interaction) => {
   }
 
   const command = client.commands.get(interaction.commandName)
-
   if (!command) {
     console.error('Command not found')
     return

@@ -7,9 +7,9 @@ import {
 } from 'discord.js';
 
 export abstract class commandClass<T> {
-    protected info: T;
+    protected info: T | undefined;
 
-    constructor(info: T) {
+    constructor(info?: T) {
         this.info = info;
     }
 
