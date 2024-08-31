@@ -1,14 +1,16 @@
 import 'dotenv/config'
 import { REST, Routes } from 'discord.js'
 import commands from '../commands'
+import listCommands from '@/discord/listCommands'
 
 const { CLIENT_ID, TOKEN, GUILD_ID } = process.env
 
 if (!TOKEN) throw new Error('Variable missing')
 
-const commandsToRegister = Object.values(commands).map(
+const commandsToRegister = Object.values(listCommands).map(
   (command) => command.data,
 )
+
 
 const rest = new REST({ version: '10' }).setToken(TOKEN)
 
