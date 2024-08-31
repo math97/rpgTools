@@ -34,3 +34,12 @@ export interface bardClass extends CharacterClass {
     }
   }[]
 }
+
+export interface barbarianClass extends CharacterClass {
+  levels: {
+    level: number
+    features: string[]
+    fury?: number
+    furyDamage: number
+  }[]
+}

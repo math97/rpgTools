@@ -37,7 +37,7 @@ Notices:
 - [ ] Implement a command to display the list of available spells.
 - [ ] Implement a command to display the data from all default class on players handbook:
     - [X] Bard
-    - [ ] Barbarian
+    - [X] Barbarian
     - [ ] Warlock
     - [ ] Cleric
     - [ ] Druid
@@ -48,6 +48,7 @@ Notices:
     - [X] Monk
     - [ ] Paladin
     - [ ] Ranger
+    - [ ] implement an embed or another form to show the specif features from each class like fury,spellslot's ...
 - [X] Implement a command to display the data from all default races on players handbook:
     - [X] Dwarf
     - [X] Elf
@@ -71,6 +72,8 @@ Notices:
     - [ ] d20
     - [ ] d100
 - [ ] add response for based locale as ["pt-Br","en-US"]
+- [ ] change images to be saved in the project
+- [ ] Improve embed style(Or change for another feature from discord to show the information)
 - [ ] Improve folder structure pattern
 - [ ] Improve types and functions
 - [ ] Add test's
