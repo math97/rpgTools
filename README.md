@@ -36,6 +36,7 @@ Notices:
 ### MVP
 - [ ] Implement a command to display the list of available spells.
 - [ ] Implement a command to display the data from all default class on players handbook:
+    - [ ] Implement a commanda race with filer giving two options for the user. Ex: "clerig" or "race clerig" where clerig after race is a filter with autocomplete
     - [X] Barbarian
     - [X] Bard
     - [X] Cleric
