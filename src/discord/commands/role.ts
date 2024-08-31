@@ -1,4 +1,5 @@
 import {
+  AnyCharacterClass,
   barbarianClass,
   CharacterClass,
   monkClass,
@@ -17,7 +18,7 @@ import { Command as CommandType } from '@/models/Command'
 import { Command } from '.'
 
 export class RoleCommand extends Command<string> {
-  protected data: CharacterClass | barbarianClass | undefined
+  protected data: AnyCharacterClass | undefined
   protected name: string
   constructor(name: string) {
     super(name)
@@ -45,11 +46,8 @@ export class RoleCommand extends Command<string> {
 
         if (!data) return interaction.reply(`Role not found`)
 
-        this.data = role.getRole(data.name) as
-          | CharacterClass
-          | barbarianClass
-          | monkClass
-
+        this.data = role.getRole(data.name) as AnyCharacterClass
+        
         return interaction.reply({ embeds: this.buildEmbed() })
       },
     }
