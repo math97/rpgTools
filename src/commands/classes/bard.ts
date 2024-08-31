@@ -1,4 +1,5 @@
 import { Command } from "@/models/Command"
+import { buildEmbedClass } from "@/utils/buildClassEmbed"
 import { CommandInteraction, EmbedBuilder, InteractionResponse, SlashCommandBuilder } from "discord.js"
 
 const bard = {
@@ -40,21 +41,8 @@ const bard = {
 
 
 const buildEmbed = ():EmbedBuilder[]=>{
-    const classEmbed = new EmbedBuilder()
-        .setColor("Orange")
-        .setTitle(bard.className)
-        .setDescription(`Characteristics of class ${bard.className}`)
-        .setThumbnail(bard.image)
-        .addFields(
-            { name: 'Life Dice', value: bard.baseStats.lifeDice, inline: true },
-            { name: 'Proficiencies', value: bard.baseStats.proficiencies.join('\n'), inline: true },
-            { name: 'Modify', value: bard.baseStats.modify, inline: true },
-            { name: 'Expertise', value: bard.baseStats.expertise.join('\n'), inline: true },
-            { name: 'Expertise Choices', value: bard.baseStats.expertiseChoices.toString(), inline: true },
-            { name: 'Saving Throws', value: bard.baseStats.savingThrows.join(', '), inline: true },
-            { name: 'Armor', value: bard.baseStats.armor || 'None', inline: true }
-        )
-
+    const classEmbed = buildEmbedClass(bard)
+    
     const levelEmbed = new EmbedBuilder()
         .setColor("Orange")
         .setTitle("Bard Levels")

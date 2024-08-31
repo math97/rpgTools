@@ -1,7 +1,8 @@
 import { Command } from "@/models/Command"
+import { buildEmbedClass } from "@/utils/buildClassEmbed"
 import { CommandInteraction, EmbedBuilder, InteractionResponse, SlashCommandBuilder } from "discord.js"
 
-const monk = {
+const monk:monkClass = {
     className: "Monk",
     image:'https://cdn.discordapp.com/attachments/1279212787372916817/1279212811590832260/881e2715-41e4-47ce-b7e2-2a3421b07df7.png?ex=66d39f44&is=66d24dc4&hm=0e035bf740caf980f49f7cbedfe90bb3f65768510a1da8ee6ea76990354dbba0&',
     baseStats: {
@@ -44,23 +45,8 @@ const monk = {
     ],
 }
 
-
-
 const buildEmbed = ():EmbedBuilder[]=>{
-    const classEmbed = new EmbedBuilder()
-        .setColor("Orange")
-        .setTitle(monk.className)
-        .setDescription(`Characteristics of class ${monk.className}`)
-        .setThumbnail(monk.image)
-        .addFields(
-            { name: 'Life Dice', value: monk.baseStats.lifeDice, inline: true },
-            { name: 'Proficiencies', value: monk.baseStats.proficiencies.join('\n'), inline: true },
-            { name: 'Modify', value: monk.baseStats.modify, inline: true },
-            { name: 'Expertise', value: monk.baseStats.expertise.join('\n'), inline: true },
-            { name: 'Expertise Choices', value: monk.baseStats.expertiseChoices.toString(), inline: true },
-            { name: 'Saving Throws', value: monk.baseStats.savingThrows.join(', '), inline: true },
-            { name: 'Armor', value: monk.baseStats.armor || 'None', inline: true }
-        )
+    const classEmbed = buildEmbedClass(monk)
 
     const levelEmbed = new EmbedBuilder()
         .setColor("Orange")

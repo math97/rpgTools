@@ -31,9 +31,6 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 
 	const command = client.commands.get(interaction.commandName)
-	// console.log(interaction.commandName)
-	// console.log(client.commands)
-	console.log(command)
 
 	if(!command){
 		console.error("Command not found")
