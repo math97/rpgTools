@@ -15,7 +15,6 @@ export class roleCommand extends commandClass<string> {
     private data: CharacterClass | barbarianClass;
     constructor(info: string) {
         super(info);
-        console.log(info);
         this.data = role.getRole(info) as CharacterClass | barbarianClass;
     }
 
