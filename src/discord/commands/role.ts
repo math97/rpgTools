@@ -20,7 +20,6 @@ export class RoleCommand extends commandClass<string> {
 
   public buildEmbed(): EmbedBuilder[] {
     const classEmbed = buildEmbedClass(this.data)
-    const a = 400
 
     const levelEmbed = new EmbedBuilder()
       .setColor('Orange')
