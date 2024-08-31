@@ -43,3 +43,12 @@ export interface barbarianClass extends CharacterClass {
     furyDamage: number
   }[]
 }
+export interface clericClass extends CharacterClass {
+  levels: {
+    level: number
+    features: string[]
+    spellSlots: {
+      [key: number]: number
+    }
+  }[]
+}
