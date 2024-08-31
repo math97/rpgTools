@@ -8,12 +8,13 @@ import {
   SlashCommandBuilder,
   SlashCommandOptionsOnlyBuilder,
 } from 'discord.js'
-import { commandClass } from '../command.class'
+import { commandClass } from '.'
 export class RaceCommand extends commandClass<string> {
-  private data: Race
-  private name: string = 'Race'
-  constructor(info: string) {
-    super(info)
+  protected data: Race
+  protected name: string = ''
+  constructor(name: string) {
+    super(name)
+    this.name = name;
     this.data = {} as Race
   }
 
@@ -64,7 +65,7 @@ export class RaceCommand extends commandClass<string> {
 
   private command(): SlashCommandOptionsOnlyBuilder {
     return new SlashCommandBuilder()
-      .setName('race')
+      .setName(this.name.toLowerCase())
       .setDescription('Replies with races from D&D 5e!')
       .addStringOption((option) =>
         option

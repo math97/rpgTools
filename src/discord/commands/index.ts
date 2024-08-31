@@ -2,10 +2,10 @@ import { Command } from '@/models/Command'
 import { EmbedBuilder } from 'discord.js'
 
 export abstract class commandClass<T> {
-  protected info: T | undefined
+  protected name: T | undefined
 
-  constructor(info?: T) {
-    this.info = info
+  constructor(name?: T) {
+    this.name = name
   }
 
   public abstract buildEmbed(): EmbedBuilder[]

@@ -8,14 +8,16 @@ import {
   InteractionResponse,
   SlashCommandBuilder,
 } from 'discord.js'
-import { commandClass } from '../command.class'
+import { commandClass } from '.'
 import { Command } from '@/models/Command'
 
 export class RoleCommand extends commandClass<string> {
-  private data: CharacterClass | barbarianClass
-  constructor(info: string) {
-    super(info)
-    this.data = role.getRole(info) as CharacterClass | barbarianClass
+  private data: CharacterClass | barbarianClass;
+  protected name: string = '';
+  constructor(name: string) {
+    super(name)
+    this.name = name;
+    this.data = role.getRole(name) as CharacterClass | barbarianClass
   }
 
   public buildEmbed(): EmbedBuilder[] {
@@ -38,7 +40,7 @@ export class RoleCommand extends commandClass<string> {
 
   public buildCommand(): Command {
     return {
-      name: this.data?.className.toLowerCase(),
+      name: this.name.toLowerCase(),
       data: this.command(),
       execute: async (
         interaction: CommandInteraction,
@@ -51,9 +53,9 @@ export class RoleCommand extends commandClass<string> {
 
   private command(): SlashCommandBuilder {
     return new SlashCommandBuilder()
-      .setName(this.data?.className.toLowerCase())
+      .setName(this.name.toLowerCase())
       .setDescription(
-        `Replies with data from ${this.data.className} class from D&D 5e!`,
+        `Replies with data from ${this.name} from D&D 5e!`,
       )
   }
 }
