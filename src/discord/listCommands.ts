@@ -1,9 +1,9 @@
-import { roleCommand } from "./commands/role";
-import { raceCommand } from "./commands/race";
+import { RaceCommand } from './commands/race'
+import { RoleCommand } from './commands/role'
 
 const commands = [
-    new roleCommand("barbarian").buildCommand(),
-    new raceCommand("race").buildCommand(),
-];
+  new RoleCommand('Barbarian').buildCommand(),
+  new RaceCommand('Race').buildCommand(),
+]
 
-export default commands;
+export default commands

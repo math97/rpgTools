@@ -1,15 +1,19 @@
+import {
+  Client,
+  Collection,
+  Events,
+  GatewayIntentBits,
+  Interaction,
+} from 'discord.js'
 import 'dotenv/config'
-import { Client, Collection, Events, GatewayIntentBits, Interaction } from 'discord.js'
-import commands from './commands'
-import { deployCommands } from './utils/deployCommands'
 import { Command } from './models/Command'
+import { deployCommands } from './utils/deployCommands'
+
+import listCommands from './discord/listCommands'
 const { TOKEN } = process.env
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 client.commands = new Collection<string, Command>()
-  
-import listCommands from './discord/listCommands'
-console.log(listCommands);
 listCommands.forEach((command) => {
   client.commands.set(command.name, command)
 })

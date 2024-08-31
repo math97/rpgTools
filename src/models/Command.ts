@@ -6,7 +6,7 @@ import {
 } from 'discord.js'
 
 export interface Command {
-  name: string,
-  data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder,
+  name: string
+  data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder
   execute(interaction: CommandInteraction): Promise<InteractionResponse | void>
 }
