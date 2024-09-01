@@ -1,9 +1,9 @@
-import { buildEmbedClass } from '@/utils/buildEmbedClass'
 import { CharacterClass } from '@/models/CharacterClass'
 import { EmbedBuilder } from 'discord.js'
 import { expect, it, describe } from 'vitest'
+import { buildEmbedRole } from './buildEmbedRole'
 
-describe('buildEmbedClass', () => {
+describe('buildEmbedRole', () => {
   const characterClass: CharacterClass = {
     className: 'Test class',
     image:
@@ -23,13 +23,13 @@ describe('buildEmbedClass', () => {
     ],
   }
   it('should return an instance of EmbedBuilder', () => {
-    const result = buildEmbedClass(characterClass)
+    const result = buildEmbedRole(characterClass)
 
     expect(result).toBeInstanceOf(EmbedBuilder)
   })
 
   it('should build the embed with the correct class information', () => {
-    const result = buildEmbedClass(characterClass)
+    const result = buildEmbedRole(characterClass)
 
     expect(result.data.title).toBe('Test class')
     expect(result.data.fields?.[0]?.name).toBe('Life Dice')

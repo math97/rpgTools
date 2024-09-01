@@ -1,7 +1,7 @@
-import { RaceCommand } from '@/discord/commands/race'
 import { SlashCommandBuilder } from 'discord.js'
 
 import { expect, it, describe, beforeEach } from 'vitest'
+import { RaceCommand } from './race'
 
 describe('RaceCommand', () => {
   let raceCommand: RaceCommand
@@ -12,11 +12,7 @@ describe('RaceCommand', () => {
 
   describe('buildCommand', () => {
     it('should have the correct name', () => {
-      console.log('raceCommand', raceCommand)
-
       const command = raceCommand.buildCommand()
-      console.log('command', command)
-
       expect(command.name).toBe('human')
     })
 
