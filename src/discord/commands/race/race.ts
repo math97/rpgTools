@@ -1,5 +1,4 @@
 import options from '@/data/races/index'
-import { Race } from '@/data/races/races.interface'
 import { Command as CommandType } from '@/models/Command'
 import {
   CommandInteraction,
@@ -8,8 +7,11 @@ import {
   SlashCommandBuilder,
   SlashCommandOptionsOnlyBuilder,
 } from 'discord.js'
-import { Command } from '.'
-export class RaceCommand extends Command<string> {
+import { EmbedCommand } from '../index'
+import { buildEmbedRace } from '../../utils/buildEmbedRace'
+import { Race } from '@/models/Races'
+
+export class RaceCommand extends EmbedCommand<string> {
   protected data: Race
   constructor(name: string) {
     super(name)
@@ -18,25 +20,7 @@ export class RaceCommand extends Command<string> {
   }
 
   public buildEmbed(): EmbedBuilder[] {
-    const raceEmbed = new EmbedBuilder()
-      .setColor('Orange')
-      .setTitle(this.data.name)
-      .setDescription(`Characteristics of race ${this.data.name}`)
-      .addFields(
-        { name: '\u200B', value: '\u200B' },
-        { name: 'abilityScore', value: this.data.abilityScore, inline: true },
-        { name: 'traits', value: this.data.traits.join('\n'), inline: true },
-        {
-          name: 'languages',
-          value: this.data.languages.join(', '),
-          inline: true,
-        },
-        {
-          name: 'proficiencies',
-          value: this.data.proficiencies.toString(),
-          inline: true,
-        },
-      )
+    const raceEmbed = buildEmbedRace(this.data)
 
     return [raceEmbed]
   }

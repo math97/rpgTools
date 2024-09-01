@@ -1,4 +1,4 @@
-import { Race } from './races.interface'
+import { Race } from '../../models/Races'
 
 const races: Race[] = [
   {

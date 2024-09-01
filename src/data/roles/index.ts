@@ -5,7 +5,7 @@ import { monk } from './monk'
 
 export class role {
   public static getRoles() {
-    return ['barbarian']
+    return ['barbarian', 'bard', 'clerig', 'monk']
   }
 
   public static rolesOption = [

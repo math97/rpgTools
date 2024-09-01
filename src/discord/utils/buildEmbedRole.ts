@@ -1,7 +1,7 @@
 import { CharacterClass } from '@/models/CharacterClass'
 import { EmbedBuilder } from 'discord.js'
 
-export const buildEmbedClass = <T extends CharacterClass>(
+export const buildEmbedRole = <T extends CharacterClass>(
   characterClass: T,
 ): EmbedBuilder => {
   const classEmbed = new EmbedBuilder()
