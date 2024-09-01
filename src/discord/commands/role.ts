@@ -1,9 +1,4 @@
-import {
-  AnyCharacterClass,
-  barbarianClass,
-  CharacterClass,
-  monkClass,
-} from '@/models/CharacterClass'
+import { AnyCharacterClass, CharacterClass } from '@/models/CharacterClass'
 import { buildEmbedClass } from '@/utils/buildClassEmbed'
 
 import { role } from '@/data/roles'
@@ -15,9 +10,9 @@ import {
   SlashCommandOptionsOnlyBuilder,
 } from 'discord.js'
 import { Command as CommandType } from '@/models/Command'
-import { Command } from '.'
+import { EmbedCommand } from './index'
 
-export class RoleCommand extends Command<string> {
+export class RoleCommand extends EmbedCommand<string> {
   protected data: AnyCharacterClass | undefined
   protected name: string
   constructor(name: string) {
@@ -47,7 +42,7 @@ export class RoleCommand extends Command<string> {
         if (!data) return interaction.reply(`Role not found`)
 
         this.data = role.getRole(data.name) as AnyCharacterClass
-        
+
         return interaction.reply({ embeds: this.buildEmbed() })
       },
     }

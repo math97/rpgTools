@@ -9,12 +9,12 @@ import 'dotenv/config'
 import { Command } from './models/Command'
 import { deployCommands } from './utils/deployCommands'
 
-import listCommands from './discord/listCommands'
+import { Commands } from './discord/commands'
 const { TOKEN } = process.env
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 client.commands = new Collection<string, Command>()
-listCommands.forEach((command) => {
+Commands.list.forEach((command) => {
   client.commands.set(command.name, command)
 })
 

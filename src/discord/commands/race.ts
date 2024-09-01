@@ -8,8 +8,9 @@ import {
   SlashCommandBuilder,
   SlashCommandOptionsOnlyBuilder,
 } from 'discord.js'
-import { Command } from '.'
-export class RaceCommand extends Command<string> {
+import { EmbedCommand } from './index'
+
+export class RaceCommand extends EmbedCommand<string> {
   protected data: Race
   constructor(name: string) {
     super(name)
