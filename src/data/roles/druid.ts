@@ -1,27 +1,50 @@
 import { magicClass } from '@/models/CharacterClass'
 
-export const clerig: magicClass = {
-  className: 'Clerig',
+export const druid: magicClass = {
+  className: 'Druid',
   image:
-    'https://cdn.discordapp.com/attachments/1279212787372916817/1279265162595012774/Z.png?ex=66d3d006&is=66d27e86&hm=96823b7fdc8205f48a5fe9bfa052f309d2832b38429dab9305e431aed52f95b6&',
+    'https://cdn.discordapp.com/attachments/1279212787372916817/1279239529626337352/27812518-2e6a-45e2-920a-5481cf61ec8e.png?ex=66d3b826&is=66d266a6&hm=2e99960ce6e98a236934724f3c376e1e476613ae4d03cda4a786adf3133bc38d&',
   baseStats: {
     lifeDice: '1d8',
-    proficiencies: ['Light Armor', 'Medium Armor', 'shields', 'Simple Weapons'],
+    proficiencies: [
+      'Light Armor',
+      'medium Armor',
+      'shields',
+      'clubs',
+      'daggers',
+      'darts',
+      'javelins',
+      'maces',
+      'quarterstaffs',
+      'scimitars',
+      'sickles',
+      'slings',
+      'spears',
+    ],
     modify: 'Charisma',
-    expertise: ['Historic', 'Religion', 'Insight', 'Medicine', 'Persuasion'],
+    expertise: [
+      'Arcana',
+      'Animal Handling',
+      'Insight',
+      'Medicine',
+      'Nature',
+      'Perception',
+      'Religion',
+      'Survival',
+    ],
     expertiseChoices: 2,
-    savingThrows: ['Wisdown', 'Charisma'],
+    savingThrows: ['Intelligence', 'Wisdom'],
     armor: 'Light Armor',
   },
   levels: [
     {
       level: 1,
-      features: ['Spellcasting', 'Divine Domain'],
+      features: ['Spellcasting', 'Druidic'],
       spellSlots: { 1: 2 },
     },
     {
       level: 2,
-      features: ['Channel Divinity', 'Divine Domain Feature'],
+      features: ['Druid Circle', 'Wild Shape'],
       spellSlots: { 1: 3 },
     },
     {
@@ -31,31 +54,23 @@ export const clerig: magicClass = {
     },
     {
       level: 4,
-      features: ['Ability Score Improvement'],
+      features: ['Ability Score Improvement', 'Wild Shape Improvement'],
       spellSlots: { 1: 4, 2: 3 },
     },
     {
       level: 5,
-      features: ['Destroy Undead (CR 1/2)'],
+      features: ['\u200b'],
       spellSlots: { 1: 4, 2: 3, 3: 2 },
     },
     {
       level: 6,
-      features: ['Channel Divinity (2/rest)', 'Divine Domain Feature'],
+      features: ['Druid Circle Feature'],
       spellSlots: { 1: 4, 2: 3, 3: 3 },
     },
-    {
-      level: 7,
-      features: ['\u200b'],
-      spellSlots: { 1: 4, 2: 3, 3: 3, 4: 1 },
-    },
+    { level: 7, features: ['\u200b'], spellSlots: { 1: 4, 2: 3, 3: 3, 4: 1 } },
     {
       level: 8,
-      features: [
-        'Ability Score Improvement',
-        'Destroy Undead (CR 1)',
-        'Divine Domain Feature',
-      ],
+      features: ['Ability Score Improvement', 'Wild Shape Improvement'],
       spellSlots: { 1: 4, 2: 3, 3: 3, 4: 2 },
     },
     {
@@ -65,12 +80,12 @@ export const clerig: magicClass = {
     },
     {
       level: 10,
-      features: ['Divine Intervention'],
+      features: ['Druid Circle Feature'],
       spellSlots: { 1: 4, 2: 3, 3: 3, 4: 3, 5: 2 },
     },
     {
       level: 11,
-      features: ['Destroy Undead (CR 2)'],
+      features: ['\u200b'],
       spellSlots: { 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1 },
     },
     {
@@ -85,7 +100,7 @@ export const clerig: magicClass = {
     },
     {
       level: 14,
-      features: ['Destroy Undead (CR 3)'],
+      features: ['Druid Circle Feature'],
       spellSlots: { 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 1 },
     },
     {
@@ -100,12 +115,12 @@ export const clerig: magicClass = {
     },
     {
       level: 17,
-      features: ['Destroy Undead (CR 4)', 'Divine Domain Feature'],
+      features: ['\u200b'],
       spellSlots: { 1: 4, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1, 7: 1, 8: 1, 9: 1 },
     },
     {
       level: 18,
-      features: ['Channel Divinity (3/rest)'],
+      features: ['Timeless Body', 'Beast Spells'],
       spellSlots: { 1: 4, 2: 3, 3: 3, 4: 3, 5: 3, 6: 1, 7: 1, 8: 1, 9: 1 },
     },
     {
@@ -115,7 +130,7 @@ export const clerig: magicClass = {
     },
     {
       level: 20,
-      features: ['Divine Intervention Improvement'],
+      features: ['Superior Inspiration'],
       spellSlots: { 1: 4, 2: 3, 3: 3, 4: 3, 5: 3, 6: 2, 7: 2, 8: 1, 9: 1 },
     },
   ],
