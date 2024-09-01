@@ -5,24 +5,15 @@ import {
   SlashCommandBuilder,
   SlashCommandOptionsOnlyBuilder,
 } from 'discord.js'
-import { Command } from './index'
+import { Command } from '../index'
+import { role } from '@/data/roles'
 
-export class RacesCommand extends Command<string> {
+export class RolesCommand extends Command<string> {
   protected data: string[]
   constructor(name: string) {
     super(name)
-    this.name = 'races'
-    this.data = [
-      'dwarf',
-      'elf',
-      'halfling',
-      'human',
-      'dragonborn',
-      'gnome',
-      'half-elf',
-      'half-orc',
-      'tiefling',
-    ]
+    this.name = 'roles'
+    this.data = role.getRoles()
   }
 
   public buildCommand(): CommandType {
@@ -33,7 +24,7 @@ export class RacesCommand extends Command<string> {
         interaction: CommandInteraction,
       ): Promise<InteractionResponse | void> => {
         return interaction.reply(
-          "Here's a list of races on D&D 5e: \n" + this.data.join(', '),
+          "Here's a list of roles/classes on D&D 5e: \n" + this.data.join(', '),
         )
       },
     }
@@ -42,6 +33,6 @@ export class RacesCommand extends Command<string> {
   private command(): SlashCommandOptionsOnlyBuilder {
     return new SlashCommandBuilder()
       .setName(this.name?.toLowerCase() ?? '')
-      .setDescription('Replies with races from D&D 5e!')
+      .setDescription('Replies with roles/classes from D&D 5e!')
   }
 }

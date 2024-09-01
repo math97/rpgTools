@@ -1,6 +1,3 @@
-import { AnyCharacterClass, CharacterClass } from '@/models/CharacterClass'
-import { buildEmbedClass } from '@/utils/buildClassEmbed'
-
 import { role } from '@/data/roles'
 import {
   CommandInteraction,
@@ -10,7 +7,9 @@ import {
   SlashCommandOptionsOnlyBuilder,
 } from 'discord.js'
 import { Command as CommandType } from '@/models/Command'
-import { EmbedCommand } from './index'
+import { EmbedCommand } from '../index'
+import { buildEmbedRole } from '../../utils/buildEmbedRole'
+import { AnyCharacterClass, CharacterClass } from '@/models/CharacterClass'
 
 export class RoleCommand extends EmbedCommand<string> {
   protected data: AnyCharacterClass | undefined
@@ -21,7 +20,7 @@ export class RoleCommand extends EmbedCommand<string> {
   }
 
   public buildEmbed(): EmbedBuilder[] {
-    const classEmbed = buildEmbedClass(this.data as CharacterClass)
+    const classEmbed = buildEmbedRole(this.data as CharacterClass)
 
     return [classEmbed]
   }

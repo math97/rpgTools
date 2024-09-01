@@ -1,5 +1,3 @@
-
-
 export interface CharacterClass {
   className: string
   image: string
@@ -54,4 +52,4 @@ export interface clericClass extends CharacterClass {
     }
   }[]
 }
-export type AnyCharacterClass = CharacterClass | monkClass | bardClass;
+export type AnyCharacterClass = CharacterClass | monkClass | bardClass

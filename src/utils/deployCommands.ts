@@ -1,9 +1,9 @@
 import { REST, Routes } from 'discord.js'
-import commands from '../commands'
+import { Commands } from '@/discord/commands'
 
 const { CLIENT_ID, TOKEN, GUILD_ID } = process.env
 
-const commandsData = Object.values(commands).map((command) => command.data)
+const commandsData = Object.values(Commands.list).map((command) => command.data)
 
 if (!TOKEN) throw new Error('missing token')
 
