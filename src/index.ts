@@ -24,8 +24,9 @@ client.once(Events.ClientReady, (readyClient: Client) => {
 
 client.login(TOKEN)
 
-client.on('guildCreate', async () => {
-  await deployCommands()
+client.on('guildCreate', async (guild) => {
+  console.log(`Joined guild: ${guild.name}`)
+  await deployCommands(guild)
 })
 
 client.on(Events.InteractionCreate, async (interaction: Interaction) => {

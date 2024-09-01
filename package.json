@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "start": "node build/index.js",
-    "deploy:commands": "node build/utils/deployCommandsOnce.js",
+    "deploy:commands": "npm run build && node build/utils/deployCommandsOnce.js",
+    "refresh:commands": "npm run build && node build/utils/refreshCommands.js",
     "build": "tsup src --out-dir build",
     "restart": "npm run build && npm run deploy:commands",
     "lint": "eslint src --ext .ts --fix"
