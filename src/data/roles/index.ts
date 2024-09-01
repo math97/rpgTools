@@ -1,17 +1,19 @@
 import { barbarian } from './barbarian'
 import { bard } from './bard'
 import { clerig } from './clerig'
+import { druid } from './druid'
 import { monk } from './monk'
 
 export class role {
   public static getRoles() {
-    return ['barbarian', 'bard', 'clerig', 'monk']
+    return ['barbarian', 'bard', 'clerig', 'monk', 'druid']
   }
 
   public static rolesOption = [
     { name: 'Barbarian', value: 'barbarian' },
     { name: 'Bard', value: 'bard' },
     { name: 'Clerig', value: 'clerig' },
+    { name: 'Druid', value: 'druid' },
     { name: 'Monk', value: 'monk' },
   ]
 
@@ -29,6 +31,9 @@ export class role {
       case 'Monk':
       case 'monk':
         return monk
+      case 'Druid':
+      case 'druid':
+        return druid
       default:
         return null
     }

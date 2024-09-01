@@ -1,6 +1,6 @@
-import { bardClass } from '@/models/CharacterClass'
+import { magicClass } from '@/models/CharacterClass'
 
-export const bard: bardClass = {
+export const bard: magicClass = {
   className: 'Bard',
   image:
     'https://cdn.discordapp.com/attachments/1279212787372916817/1279239529626337352/27812518-2e6a-45e2-920a-5481cf61ec8e.png?ex=66d3b826&is=66d266a6&hm=2e99960ce6e98a236934724f3c376e1e476613ae4d03cda4a786adf3133bc38d&',

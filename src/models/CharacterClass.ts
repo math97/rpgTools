@@ -52,4 +52,16 @@ export interface clericClass extends CharacterClass {
     }
   }[]
 }
+
+export interface druidClass extends CharacterClass {
+  levels: {
+    level: number
+    features: string[]
+    spellSlots: {
+      [key: number]: number
+    }
+  }[]
+}
+
 export type AnyCharacterClass = CharacterClass | monkClass | bardClass
+export type magicClass = bardClass | clericClass | druidClass
