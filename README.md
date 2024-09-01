@@ -40,8 +40,8 @@ Notices:
     - [X] Barbarian
     - [X] Bard
     - [X] Cleric
-    - [ ] Druid
-    - [ ] Fighter
+    - [X] Druid
+    - [X] Fighter
     - [X] Monk
     - [ ] Paladin
     - [ ] Ranger
