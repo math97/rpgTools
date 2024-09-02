@@ -13,6 +13,12 @@ export class RegisterNewGuildUseCase {
     guildData: Prisma.GuildCreateInput,
     homebrewData: Prisma.HomeBrewCreateWithoutGuildInput,
   ): Promise<{ guild: Guild; homebrew: HomeBrew }> {
+    const guildExist = await this.guildRepository.findByGuildId(
+      guildData.guildId,
+    )
+
+    if (guildExist) throw new Error('Guild already exists')
+
     const guild = await this.guildRepository.create(guildData)
 
     const homebrew = await this.homebrewRepository.create({

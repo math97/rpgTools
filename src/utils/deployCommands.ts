@@ -1,8 +1,5 @@
 import { REST, Routes, Guild } from 'discord.js'
 import { Commands } from '@/discord/commands'
-import { PrismaGuildRepository } from '@/repositories/prisma/prismaGuildRepository'
-import { RegisterNewGuildUseCase } from '@/useCases/registerNewGuildUseCase'
-import { PrismaHomebrewRepository } from '@/repositories/prisma/prismaHomebrewRepository'
 
 export async function deployCommands(guild: Guild) {
   const { CLIENT_ID, TOKEN } = process.env
@@ -25,26 +22,6 @@ export async function deployCommands(guild: Guild) {
     await rest.put(Routes.applicationGuildCommands(CLIENT_ID, guild.id), {
       body: commandsData,
     })
-
-    const guildRepository = PrismaGuildRepository.getInstance()
-    const homeBrewRepository = PrismaHomebrewRepository.getInstance()
-
-    const registerNewGuildUseCase = new RegisterNewGuildUseCase(
-      guildRepository,
-      homeBrewRepository,
-    )
-    const description = guild.description ? guild.description : undefined
-
-    const guildToRegister = { guildId: guild.id, name: guild.name, description }
-
-    const { guild: guildRegistered, homebrew } =
-      await registerNewGuildUseCase.execute(guildToRegister, {
-        name: `${guild.name} Homebrews`,
-        description: `Homebrews for ${guild.name}`,
-      })
-
-    console.log('Guild registered:', guildRegistered)
-    console.log('homebrew registered:', homebrew)
 
     console.log('Successfully reloaded application (/) commands.')
   } catch (error) {

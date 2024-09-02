@@ -34,7 +34,7 @@ enum Size {
 model Guild {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  guildId     String
+  guildId     String     @unique
   description String?
   HomeBrew    HomeBrew[]
 }

@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { Guild, Prisma } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
 import { GuildRepository } from '../guildRepository'
 
@@ -15,10 +15,20 @@ export class PrismaGuildRepository implements GuildRepository {
   }
 
   async create(data: Prisma.GuildCreateInput) {
-    const checkIn = await prisma.guild.create({
+    const guild = await prisma.guild.create({
       data,
     })
 
-    return checkIn
+    return guild
+  }
+
+  async findByGuildId(guildId: string): Promise<Guild | null> {
+    const guild = await prisma.guild.findUnique({
+      where: {
+        guildId,
+      },
+    })
+
+    return guild
   }
 }

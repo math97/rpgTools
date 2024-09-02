@@ -10,6 +10,7 @@ import { Command } from './models/Command'
 import { deployCommands } from './utils/deployCommands'
 
 import { Commands } from './discord/commands'
+import { registerGuildController } from './controllers/registerGuildController'
 const { TOKEN } = process.env
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
@@ -25,8 +26,8 @@ client.once(Events.ClientReady, (readyClient: Client) => {
 client.login(TOKEN)
 
 client.on('guildCreate', async (guild) => {
-  console.log(`Joined guild: ${guild.name}`)
   await deployCommands(guild)
+  await registerGuildController(guild)
 })
 
 client.on(Events.InteractionCreate, async (interaction: Interaction) => {
