@@ -6,7 +6,7 @@ export class PrismaGuildRepository implements GuildRepository {
   // eslint-disable-next-line no-use-before-define
   private static guildRepository: PrismaGuildRepository
 
-  static getguildRepository() {
+  static getGuildRepository() {
     if (this.guildRepository) {
       return this.guildRepository
     }

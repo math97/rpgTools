@@ -5,15 +5,15 @@ import { PrismaHomebrewRepository } from '@/repositories/prisma/prismaHomebrewRe
 import { GuildRepository } from '@/repositories/guildRepository'
 import { HomebrewRepository } from '@/repositories/homebrewRepository'
 
-export class registerGuildController {
+export class RegisterGuildController {
   private guildRepository: GuildRepository
   private homeBrewRepository: HomebrewRepository
   constructor() {
-    this.guildRepository = PrismaGuildRepository.getguildRepository()
+    this.guildRepository = PrismaGuildRepository.getGuildRepository()
     this.homeBrewRepository = PrismaHomebrewRepository.getHomeBrewRepository()
   }
 
-  public async execution(guild: Guild): Promise<void> {
+  public async execute(guild: Guild): Promise<void> {
     const registerNewGuildUseCase = new RegisterNewGuildUseCase(
       this.guildRepository,
       this.homeBrewRepository,
@@ -25,13 +25,9 @@ export class registerGuildController {
       description: guild.description,
     }
 
-    const { guild: guildRegistered, homebrew } =
-      await registerNewGuildUseCase.execute(guildToRegister, {
-        name: `${guild.name} Homebrews`,
-        description: `Homebrews for ${guild.name}`,
-      })
-
-    console.log('Guild registered:', guildRegistered)
-    console.log('homebrew registered:', homebrew)
+    await registerNewGuildUseCase.execute(guildToRegister, {
+      name: `${guild.name} Homebrews`,
+      description: `Homebrews for ${guild.name}`,
+    })
   }
 }

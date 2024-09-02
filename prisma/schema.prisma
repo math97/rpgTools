@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Type {
+enum AbilityScoreType {
   STRENGTH
   DEXTERITY
   CONSTITUTION
@@ -32,20 +32,20 @@ enum Size {
 }
 
 model Guild {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  guildId     String     @unique
+  guildId     String    @unique
   description String?
-  HomeBrew    HomeBrew[]
+  homeBrew    HomeBrew? @relation("GuildHomeBrew")
 }
 
 model HomeBrew {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String
-  guildId     String @db.ObjectId
-  guild       Guild  @relation(fields: [guildId], references: [id])
-  races       Race[]
+  guildId     String @unique
+  guild       Guild  @relation("GuildHomeBrew", fields: [guildId], references: [guildId])
+  races       Race[] @relation("HomeBrewRace")
 }
 
 model Race {
@@ -57,18 +57,19 @@ model Race {
   proficienciesNumber Int
   proficiencies       String[]
   abilityScore        AbilityScore[]
+  weaponProficiencies String[]
   armorClass          ArmorClass[]
   size                Size
-  HomeBrew            HomeBrew?      @relation(fields: [homeBrewId], references: [id])
-  homeBrewId          String?        @db.ObjectId
+  homeBrew            HomeBrew?      @relation("HomeBrewRace", fields: [homeBrewId], references: [id])
+  homeBrewId          String?        @unique @db.ObjectId
 }
 
 model AbilityScore {
-  id     String  @id @default(auto()) @map("_id") @db.ObjectId
-  type   Type    @unique
+  id     String           @id @default(auto()) @map("_id") @db.ObjectId
+  type   AbilityScoreType @unique
   value  Int
-  Race   Race?   @relation(fields: [raceId], references: [id])
-  raceId String? @db.ObjectId
+  Race   Race?            @relation(fields: [raceId], references: [id])
+  raceId String?          @db.ObjectId
 }
 
 model Levels {
