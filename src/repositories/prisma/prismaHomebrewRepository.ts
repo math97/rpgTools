@@ -4,14 +4,14 @@ import { HomebrewRepository } from '../homebrewRepository'
 
 export class PrismaHomebrewRepository implements HomebrewRepository {
   // eslint-disable-next-line no-use-before-define
-  private static instance: PrismaHomebrewRepository
+  private static homeBrewRepository: PrismaHomebrewRepository
 
-  static getInstance() {
-    if (this.instance) {
-      return this.instance
+  static getHomeBrewRepository() {
+    if (this.homeBrewRepository) {
+      return this.homeBrewRepository
     }
-    this.instance = new PrismaHomebrewRepository()
-    return this.instance
+    this.homeBrewRepository = new PrismaHomebrewRepository()
+    return this.homeBrewRepository
   }
 
   async create(data: Prisma.HomeBrewCreateInput) {

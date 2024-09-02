@@ -4,14 +4,14 @@ import { GuildRepository } from '../guildRepository'
 
 export class PrismaGuildRepository implements GuildRepository {
   // eslint-disable-next-line no-use-before-define
-  private static instance: PrismaGuildRepository
+  private static guildRepository: PrismaGuildRepository
 
-  static getInstance() {
-    if (this.instance) {
-      return this.instance
+  static getguildRepository() {
+    if (this.guildRepository) {
+      return this.guildRepository
     }
-    this.instance = new PrismaGuildRepository()
-    return this.instance
+    this.guildRepository = new PrismaGuildRepository()
+    return this.guildRepository
   }
 
   async create(data: Prisma.GuildCreateInput) {
