@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "start": "node build/index.js",
@@ -10,7 +11,9 @@
     "refresh:commands": "npm run build && node build/utils/refreshCommands.js",
     "build": "tsup src --out-dir build",
     "restart": "npm run build && npm run deploy:commands",
-    "lint": "eslint src --ext .ts --fix"
+    "lint": "eslint src --ext .ts --fix",
+    "test": "vitest run --dir src/",
+    "test:watch": "vitest --dir src/"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +26,9 @@
     "ts-node": "^10.9.2",
     "tsup": "^8.2.4",
     "tsx": "^4.19.0",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vite-tsconfig-paths": "^5.0.1",
+    "vitest": "^2.0.5"
   },
   "dependencies": {
     "@prisma/client": "^5.19.0",

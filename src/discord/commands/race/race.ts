@@ -32,6 +32,7 @@ export class RaceCommand extends EmbedCommand<string> {
       execute: async (
         interaction: CommandInteraction,
       ): Promise<InteractionResponse | void> => {
+        console.log('raceOption', interaction.options)
         const raceOption = interaction.options.get('filter')?.value
 
         this.data =
