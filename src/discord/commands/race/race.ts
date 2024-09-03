@@ -9,14 +9,15 @@ import {
 } from 'discord.js'
 import { EmbedCommand } from '../index'
 import { buildEmbedRace } from '../../utils/buildEmbedRace'
-import { Race } from '@/models/Races'
+import { Race } from '@prisma/client'
 
 export class RaceCommand extends EmbedCommand<string> {
-  protected data: Race
+  protected data: Omit<Race, 'abilityScore' | 'id' | 'homeBrewId'>
+
   constructor(name: string) {
     super(name)
     this.name = name ?? 'Race'
-    this.data = {} as Race
+    this.data = {} as Omit<Race, 'abilityScore' | 'id' | 'homeBrewId'>
   }
 
   public buildEmbed(): EmbedBuilder[] {
@@ -38,7 +39,7 @@ export class RaceCommand extends EmbedCommand<string> {
         this.data =
           options.races.find(
             (race) => race.name.toLowerCase() === raceOption,
-          ) ?? ({} as Race)
+          ) ?? ({} as Omit<Race, 'abilityScore' | 'id' | 'homeBrewId'>)
 
         if (!this.data) return interaction.reply(`Race not found`)
 
