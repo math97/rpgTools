@@ -33,13 +33,13 @@ export class RaceCommand extends EmbedCommand<string> {
       execute: async (
         interaction: CommandInteraction,
       ): Promise<InteractionResponse | void> => {
-        console.log('raceOption', interaction.options)
         const raceOption = interaction.options.get('filter')?.value
 
-        this.data =
-          options.races.find(
-            (race) => race.name.toLowerCase() === raceOption,
-          ) ?? ({} as Omit<Race, 'abilityScore' | 'id' | 'homeBrewId'>)
+        const option = options.racesOption.find((option) => option.value === raceOption)
+
+        const findData = options.races.find(t => t.name === option?.name)
+
+        this.data = findData ?? ({} as Omit<Race, 'abilityScore' | 'id' | 'homeBrewId'>)
 
         if (!this.data) return interaction.reply(`Race not found`)
 
