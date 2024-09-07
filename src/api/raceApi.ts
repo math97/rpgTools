@@ -17,6 +17,22 @@ export interface Ilanguages {
   url: string
 }
 
+export interface ILanguageOptions {
+  choose: number
+  from: {
+    option_set_type: string
+    options: {
+      option_type: string
+      item: {
+        index: string
+        name: string
+        url: string
+      }[]
+    }
+  }
+  type: string
+}
+
 export interface ITraits {
   index: string
   name: string
@@ -68,39 +84,15 @@ export interface ISubRaceApiResponse {
   }
   desc: string
   ability_bonuses: IAbilityBonuses[]
-  starting_proficiencies: {
-    index: string
-    name: string
-    url: string
-  }[]
-  starting_proficiency_options: {
-    choose: number
-    from: {
-      index: string
-      name: string
-      url: string
-    }[]
-    type: string
-  }
+  starting_proficiencies: IstartingProficiencies[]
+  starting_proficiency_options: IstartingProficienciesOption[]
   languages: []
-  language_options: {
-    choose: number
-    from: {
-      index: string
-      name: string
-      url: string
-    }[]
-    type: string
-  }
-  racial_traits: {
-    index: string
-    name: string
-    url: string
-  }[]
+  language_options: ILanguageOptions
+  racial_traits: ITraits[]
   url: string
 }
 
-class RacesApi {
+export class RacesApi {
   private headers: Headers
   private requestOptions: RequestInit
   constructor() {
@@ -127,5 +119,3 @@ class RacesApi {
     return data
   }
 }
-
-export default RacesApi

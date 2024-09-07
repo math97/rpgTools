@@ -1,4 +1,4 @@
-import RacesApi, { ISubRaceApiResponse } from '@/api/raceApi'
+import { ISubRaceApiResponse, RacesApi } from '@/api/raceApi'
 
 export class GetSubRacesUseCase {
   async execute(subRaceName: string): Promise<ISubRaceApiResponse> {

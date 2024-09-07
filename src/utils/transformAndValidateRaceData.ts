@@ -32,14 +32,11 @@ export class TransformAndValidateRaceData {
     race: IRaceApiResponse,
     subracesId?: string[],
   ): Prisma.BaseRaceCreateInput {
-    console.log('subracesId', subracesId)
     const subsRaceIdConnect =
       subracesId &&
       subracesId?.map((id) => {
         return { id }
       })
-
-    console.log('subsRaceIdConnect', subsRaceIdConnect)
 
     const baseRace: Prisma.BaseRaceCreateInput = {
       name: race.name,
@@ -78,7 +75,8 @@ export class TransformAndValidateRaceData {
           })),
         },
       },
-      proficienciesNumber: subRace.starting_proficiency_options?.choose || 0,
+      proficienciesNumber:
+        subRace.starting_proficiency_options?.[0].choose || 0,
       proficiencies: subRace.starting_proficiencies?.map(
         (proeficiency) => proeficiency.name,
       ) || ['NONE'],

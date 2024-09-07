@@ -6,15 +6,18 @@ import { PrismaBaseRaceRepository } from '@/repositories/prisma/prismaBaseRaceRe
 import { GetSubRacesUseCase } from '@/useCases/races/getSubRacesUseCase'
 import { PrismaBaseSubRaceRepository } from '@/repositories/prisma/prismaBaseSubRaceRepository'
 import { TransformAndValidateRaceData } from './transformAndValidateRaceData'
+import { BaseRaceRepository } from '@/repositories/baseRaceRepository'
+import { BaseSubRaceRepository } from '@/repositories/baseSubRaceRepository'
 
-class InsertDefaultRacesAndSubRaces {
-  public static async handle() {
-    await this.insertDefaultRaceData()
-  }
+export class InsertDefaultRacesAndSubRaces {
+  // eslint-disable-next-line no-useless-constructor
+  constructor(
+    private baseRaceRepository: BaseRaceRepository,
+    private subRaceRepository: BaseSubRaceRepository,
+  ) {}
 
-  private static async insertDefaultRaceData() {
+  public async insertDefaultRaceData() {
     const getRacesUseCase = new GetRacesUseCase()
-    const raceRepository = new PrismaBaseRaceRepository()
 
     await Promise.all(
       Object.values(DefaultRaces).map(async (defaultRace) => {
@@ -24,10 +27,8 @@ class InsertDefaultRacesAndSubRaces {
         let baseRaceInput: Prisma.BaseRaceCreateInput
 
         if (hasSubRace) {
-          const subRaces = hasSubRace && (await getSubRace(race.subraces))
+          const subRaces = hasSubRace && (await this.getSubRace(race.subraces))
           const subRacesId = await this.insertDefaultSubRaceData(subRaces)
-
-          console.log('subRacesId', subRacesId)
 
           baseRaceInput =
             TransformAndValidateRaceData.transformIntoBaseRaceInput(
@@ -38,16 +39,14 @@ class InsertDefaultRacesAndSubRaces {
           baseRaceInput =
             TransformAndValidateRaceData.transformIntoBaseRaceInput(race)
         }
-        await raceRepository.create(baseRaceInput)
+        await this.baseRaceRepository.create(baseRaceInput)
       }),
     )
   }
 
-  private static async insertDefaultSubRaceData(
+  private async insertDefaultSubRaceData(
     subRaces: ISubRaceApiResponse[],
   ): Promise<string[]> {
-    const subRaceRepository = new PrismaBaseSubRaceRepository()
-
     const subRacePrisma = subRaces.map(
       TransformAndValidateRaceData.transformIntoSubRaceInput,
     )
@@ -55,7 +54,7 @@ class InsertDefaultRacesAndSubRaces {
 
     await Promise.all(
       subRacePrisma.map(async (subRace) => {
-        const subRaceResponse = await subRaceRepository.create(subRace)
+        const subRaceResponse = await this.subRaceRepository.create(subRace)
         subRacesResponse.push(subRaceResponse)
       }),
     )
@@ -64,23 +63,31 @@ class InsertDefaultRacesAndSubRaces {
 
     return subRacesId
   }
-}
 
-async function getSubRace(
-  subRaces: ISubRaces[],
-): Promise<ISubRaceApiResponse[]> {
-  const getSubRacesUseCase = new GetSubRacesUseCase()
+  private async getSubRace(
+    subRaces: ISubRaces[],
+  ): Promise<ISubRaceApiResponse[]> {
+    const getSubRacesUseCase = new GetSubRacesUseCase()
 
-  const subRacesResponse: ISubRaceApiResponse[] = []
+    const subRacesResponse: ISubRaceApiResponse[] = []
 
-  for (const subRace of subRaces) {
-    const subRaceDetails = await getSubRacesUseCase.execute(subRace.index)
-    subRacesResponse.push(subRaceDetails)
+    for (const subRace of subRaces) {
+      const subRaceDetails = await getSubRacesUseCase.execute(subRace.index)
+      subRacesResponse.push(subRaceDetails)
+    }
+
+    return subRacesResponse
   }
-
-  return subRacesResponse
 }
 
 ;(async () => {
-  InsertDefaultRacesAndSubRaces.handle()
+  const raceRepository = new PrismaBaseRaceRepository()
+  const subRaceRepository = new PrismaBaseSubRaceRepository()
+
+  const insertDefaultRacesAndSubRaces = new InsertDefaultRacesAndSubRaces(
+    raceRepository,
+    subRaceRepository,
+  )
+
+  insertDefaultRacesAndSubRaces.insertDefaultRaceData()
 })()
