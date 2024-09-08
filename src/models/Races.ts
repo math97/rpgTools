@@ -5,21 +5,21 @@ export enum DefaultRaces {
   HUMAN = 'human',
   DRAGONBORN = 'dragonborn',
   GNOME = 'gnome',
-  // HALFELF = 'half-elf',
-  // HALFORC = 'half-orc',
+  'HALF-ELF' = 'half-elf',
+  'HALF-ORC' = 'half-orc',
   TIEFLING = 'tiefling',
 }
 
 export const racesOption = [
-  { name: 'Human', value: 'human' },
-  { name: 'Elf', value: 'elf' },
-  { name: 'Dwarf', value: 'dwarf' },
-  { name: 'Halfling', value: 'halfling' },
-  { name: 'Dragonborn', value: 'dragonborn' },
-  { name: 'Gnome', value: 'gnome' },
-  { name: 'Half-Elf', value: 'half_elf' },
-  { name: 'Half-Orc', value: 'half_orc' },
-  { name: 'Tiefling', value: 'tiefling' },
+  { name: 'Human', value: 'Human' },
+  { name: 'Elf', value: 'Elf' },
+  { name: 'Dwarf', value: 'Dwarf' },
+  { name: 'Halfling', value: 'Halfling' },
+  { name: 'Dragonborn', value: 'Dragonborn' },
+  { name: 'Gnome', value: 'Gnome' },
+  { name: 'Half-Elf', value: 'Half-Elf' },
+  { name: 'Half-Orc', value: 'Half-Orc' },
+  { name: 'Tiefling', value: 'Tiefling' },
 ]
 
 export type defaultRacesType = keyof typeof DefaultRaces

@@ -24,8 +24,6 @@ const addFields = (
 ): EmbedBuilder => {
   Object.keys(race).forEach((key) => {
     const value = race[key as keyof BaseRaceWithRelations]
-    console.log('key', key)
-    console.log('value', value)
 
     if (value) {
       switch (key) {

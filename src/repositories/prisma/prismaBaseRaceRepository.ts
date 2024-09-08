@@ -25,10 +25,9 @@ export class PrismaBaseRaceRepository implements BaseRaceRepository {
   }
 
   async findRaceByName(name: string): Promise<BaseRaceWithRelations | null> {
-    const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1)
     const race = await prisma.baseRace.findUnique({
       where: {
-        name: capitalizedName,
+        name,
       },
       include: {
         subRaces: true,
