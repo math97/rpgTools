@@ -1,6 +1,6 @@
 import { DefaultRaces } from '@/models/Races'
 import { Prisma, SubRace } from '@prisma/client'
-import { GetRacesUseCase } from '@/useCases/races/getRacesUseCase'
+import { GetRacesApiUseCase } from '@/useCases/races/getRacesApiUseCase'
 import { ISubRaceApiResponse, ISubRaces } from '@/api/raceApi'
 import { PrismaBaseRaceRepository } from '@/repositories/prisma/prismaBaseRaceRepository'
 import { GetSubRacesUseCase } from '@/useCases/races/getSubRacesUseCase'
@@ -17,11 +17,11 @@ export class InsertDefaultRacesAndSubRaces {
   ) {}
 
   public async insertDefaultRaceData() {
-    const getRacesUseCase = new GetRacesUseCase()
+    const getRacesApiUseCase = new GetRacesApiUseCase()
 
     await Promise.all(
       Object.values(DefaultRaces).map(async (defaultRace) => {
-        const race = await getRacesUseCase.execute(defaultRace)
+        const race = await getRacesApiUseCase.execute(defaultRace)
         const hasSubRace = race.subraces.length > 0
 
         let baseRaceInput: Prisma.BaseRaceCreateInput

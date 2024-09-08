@@ -63,7 +63,7 @@ describe('insertDefaultRaceData', () => {
     'getSpecificSubRace',
   )
 
-  beforeEach(() => {
+  beforeEach(async () => {
     baseRaceRepository = new InMemoryBaseRaceRepository()
     baseSubRaceRepository = new InMemoryBaseSubRaceRepository()
     insertDefaultRacesAndSubRaces = new InsertDefaultRacesAndSubRaces(

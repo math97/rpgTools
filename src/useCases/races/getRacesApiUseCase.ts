@@ -1,7 +1,7 @@
-import RacesApi, { IRaceApiResponse } from '@/api/raceApi'
+import { IRaceApiResponse, RacesApi } from '@/api/raceApi'
 import { DefaultRaces, defaultRacesType } from '@/models/Races'
 
-export class GetRacesUseCase {
+export class GetRacesApiUseCase {
   async execute(raceName: string): Promise<IRaceApiResponse> {
     const isDefaultRace =
       DefaultRaces[raceName.toUpperCase() as defaultRacesType]

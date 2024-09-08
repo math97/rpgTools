@@ -1,6 +1,7 @@
 import { Prisma, BaseRace } from '@prisma/client'
 import { BaseRaceRepository } from '../baseRaceRepository'
 import { randomUUID } from 'crypto'
+import { BaseRaceWithRelations } from '../prisma/prismaBaseRaceRepository'
 
 export class InMemoryBaseRaceRepository implements BaseRaceRepository {
   public baseRaces: BaseRace[] = []
@@ -21,5 +22,11 @@ export class InMemoryBaseRaceRepository implements BaseRaceRepository {
     this.baseRaces.push(race)
 
     return race
+  }
+
+  async findRaceByName(name: string): Promise<BaseRaceWithRelations | null> {
+    return this.baseRaces.filter(
+      (race) => race.name === name,
+    )[0] as BaseRaceWithRelations
   }
 }
