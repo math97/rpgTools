@@ -8,18 +8,20 @@ datasource db {
 }
 
 enum AbilityScoreType {
-  STRENGTH
-  DEXTERITY
-  CONSTITUTION
-  INTELLIGENCE
-  WISDOM
-  CHARISMA
+  STR
+  DEX
+  CON
+  INT
+  WIS
+  CHA
 }
 
 enum ArmorClass {
+  NONE
   LIGHT
   MEDIUM
   HEAVY
+  ALL
 }
 
 enum Size {
@@ -40,15 +42,30 @@ model Guild {
 }
 
 model HomeBrew {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String
-  guildId     String @unique
-  guild       Guild  @relation("GuildHomeBrew", fields: [guildId], references: [guildId])
-  races       Race[] @relation("HomeBrewRace")
+  guildId     String       @unique
+  guild       Guild        @relation("GuildHomeBrew", fields: [guildId], references: [guildId])
+  races       CustomRace[] @relation("HomeBrewCustomRace")
 }
 
-model Race {
+model CustomRace {
+  id                  String         @id @default(auto()) @map("_id") @db.ObjectId
+  name                String         @unique
+  description         String
+  languages           String[]
+  movementSpeed       Float
+  traits              String[]
+  proficienciesNumber Int
+  proficiencies       String[]
+  abilityScore        AbilityScore[]
+  size                Size
+  homeBrew            HomeBrew?      @relation("HomeBrewCustomRace", fields: [homeBrewId], references: [id])
+  homeBrewId          String?        @unique @db.ObjectId
+}
+
+model BaseRace {
   id                  String         @id @default(auto()) @map("_id") @db.ObjectId
   name                String         @unique
   languages           String[]
@@ -57,19 +74,33 @@ model Race {
   proficienciesNumber Int
   proficiencies       String[]
   abilityScore        AbilityScore[]
-  weaponProficiencies String[]
-  armorClass          ArmorClass[]
   size                Size
-  homeBrew            HomeBrew?      @relation("HomeBrewRace", fields: [homeBrewId], references: [id])
-  homeBrewId          String?        @unique @db.ObjectId
+  subRaces            SubRace[]
+}
+
+model SubRace {
+  id                  String         @id @default(auto()) @map("_id") @db.ObjectId
+  name                String         @unique
+  description         String
+  languages           String[]
+  traits              String[]
+  proficienciesNumber Int
+  proficiencies       String[]
+  abilityScore        AbilityScore[]
+  BaseRace            BaseRace?      @relation(fields: [baseRaceId], references: [id])
+  baseRaceId          String?        @db.ObjectId
 }
 
 model AbilityScore {
-  id     String           @id @default(auto()) @map("_id") @db.ObjectId
-  type   AbilityScoreType @unique
-  value  Int
-  Race   Race?            @relation(fields: [raceId], references: [id])
-  raceId String?          @db.ObjectId
+  id         String           @id @default(auto()) @map("_id") @db.ObjectId
+  type       AbilityScoreType
+  value      Int
+  Race       CustomRace?      @relation(fields: [raceId], references: [id])
+  raceId     String?          @db.ObjectId
+  BaseRace   BaseRace?        @relation(fields: [baseRaceId], references: [id])
+  baseRaceId String?          @db.ObjectId
+  SubRace    SubRace?         @relation(fields: [subRaceId], references: [id])
+  subRaceId  String?          @db.ObjectId
 }
 
 model Levels {

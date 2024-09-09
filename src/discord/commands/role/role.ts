@@ -42,8 +42,6 @@ export class RoleCommand extends EmbedCommand<string> {
 
         this.data = role.getRole(data.name) as AnyCharacterClass
 
-        console.log('this.data', this.data)
-
         return interaction.reply({ embeds: this.buildEmbed() })
       },
     }
