@@ -23,7 +23,7 @@ export class RegisterNewGuildUseCase {
 
     const homebrew = await this.homebrewRepository.create({
       ...homebrewData,
-      guild: { connect: { id: guild.guildId } },
+      guild: { connect: { guildId: guild.guildId } },
     })
 
     return { guild, homebrew }

@@ -32,23 +32,37 @@ client.on('guildCreate', async (guild) => {
   await registerGuildController.execute(guild)
 })
 
-client.on(Events.InteractionCreate, async (interaction: Interaction) => {
-  if (!interaction.isCommand()) {
+client.on('interactionCreate', async (interaction: Interaction) => {
+  if (!interaction.isCommand() && !interaction.isModalSubmit()) {
+    console.error('Not a command')
     return
   }
+  if (interaction.isModalSubmit()) {
+    if (interaction.customId === 'addRaceModalData') {
+      const command = client.commands.get('savecustomrace')
+      if (!command) {
+        console.error('Command not found')
+        return
+      }
+      await command.execute(interaction)
+    }
+  } else {
+    console.log('Command received', interaction.commandName)
+    const command = client.commands.get(interaction.commandName)
+    if (!command) {
+      console.error('Command not found')
+      return
+    }
 
-  const command = client.commands.get(interaction.commandName)
-  if (!command) {
-    console.error('Command not found')
-    return
-  }
-
-  try {
-    await command.execute(interaction)
-  } catch (error) {
-    console.error(`Failed command ${command.commandName} with error: ${error}`)
-    await interaction.reply(
-      `There was an error executin command: ${command.commandName}`,
-    )
+    try {
+      await command.execute(interaction)
+    } catch (error) {
+      console.error(
+        `Failed command ${command.commandName} with error: ${error}`,
+      )
+      await interaction.reply(
+        `There was an error executin command: ${command.commandName}`,
+      )
+    }
   }
 })

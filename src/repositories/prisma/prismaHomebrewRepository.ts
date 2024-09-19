@@ -21,4 +21,10 @@ export class PrismaHomebrewRepository implements HomebrewRepository {
 
     return homeBrew
   }
+
+  async findByGuildId(guildId: string) {
+    const homeBrew = await prisma.homeBrew.findFirst({ where: { guildId } })
+
+    return homeBrew
+  }
 }

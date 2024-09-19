@@ -52,17 +52,27 @@ model HomeBrew {
 
 model CustomRace {
   id                  String         @id @default(auto()) @map("_id") @db.ObjectId
-  name                String         @unique
-  description         String
+  name                String
+  description         String?
   languages           String[]
-  movementSpeed       Float
-  traits              String[]
-  proficienciesNumber Int
+  age                 String
+  movementSpeed       Float?
+  flySpeed            Float?
+  traits              traits[]
+  proficienciesNumber Int?
   proficiencies       String[]
   abilityScore        AbilityScore[]
   size                Size
-  homeBrew            HomeBrew?      @relation("HomeBrewCustomRace", fields: [homeBrewId], references: [id])
-  homeBrewId          String?        @unique @db.ObjectId
+  homeBrew            HomeBrew       @relation("HomeBrewCustomRace", fields: [homeBrewId], references: [id])
+  homeBrewId          String         @db.ObjectId
+}
+
+model traits {
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  description  String
+  CustomRace   CustomRace? @relation(fields: [customRaceId], references: [id])
+  customRaceId String?     @db.ObjectId
 }
 
 model BaseRace {
@@ -92,15 +102,15 @@ model SubRace {
 }
 
 model AbilityScore {
-  id         String           @id @default(auto()) @map("_id") @db.ObjectId
-  type       AbilityScoreType
-  value      Int
-  Race       CustomRace?      @relation(fields: [raceId], references: [id])
-  raceId     String?          @db.ObjectId
-  BaseRace   BaseRace?        @relation(fields: [baseRaceId], references: [id])
-  baseRaceId String?          @db.ObjectId
-  SubRace    SubRace?         @relation(fields: [subRaceId], references: [id])
-  subRaceId  String?          @db.ObjectId
+  id           String           @id @default(auto()) @map("_id") @db.ObjectId
+  type         AbilityScoreType
+  value        Int
+  customRace   CustomRace?      @relation(fields: [customRaceId], references: [id])
+  customRaceId String?          @db.ObjectId
+  BaseRace     BaseRace?        @relation(fields: [baseRaceId], references: [id])
+  baseRaceId   String?          @db.ObjectId
+  SubRace      SubRace?         @relation(fields: [subRaceId], references: [id])
+  subRaceId    String?          @db.ObjectId
 }
 
 model Levels {
