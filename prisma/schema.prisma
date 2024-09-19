@@ -52,18 +52,19 @@ model HomeBrew {
 
 model CustomRace {
   id                  String         @id @default(auto()) @map("_id") @db.ObjectId
-  name                String         @unique
-  description         String
+  name                String
+  description         String?
   languages           String[]
-  movementSpeed       Float
+  age                 String
+  movementSpeed       Float?
   flySpeed            Float?
   traits              traits[]
-  proficienciesNumber Int
+  proficienciesNumber Int?
   proficiencies       String[]
   abilityScore        AbilityScore[]
   size                Size
-  homeBrew            HomeBrew?      @relation("HomeBrewCustomRace", fields: [homeBrewId], references: [id])
-  homeBrewId          String?        @unique @db.ObjectId
+  homeBrew            HomeBrew       @relation("HomeBrewCustomRace", fields: [homeBrewId], references: [id])
+  homeBrewId          String         @db.ObjectId
 }
 
 model traits {
