@@ -12,8 +12,9 @@ export class GetHomeBrewByGuildIdUseCase {
       if (!homeBrew) throw new Error('Homebrew not found')
       return homeBrew
     } catch (error) {
-      console.error(error)
-      throw new Error('An error occurred while trying to get the homebrew')
+      throw new Error(
+        `An error occurred while trying to get the homebrew. ${error}`,
+      )
     }
   }
 }
