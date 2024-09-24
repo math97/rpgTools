@@ -11,7 +11,7 @@ import { deployCommands } from './utils/deployCommands'
 
 import { Commands } from './discord/commands'
 import { RegisterGuildController } from './controllers/registerGuildController'
-const { TOKEN } = process.env
+const { DISCORD_TOKEN } = process.env
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 const registerGuildController = new RegisterGuildController()
@@ -25,7 +25,7 @@ client.once(Events.ClientReady, (readyClient: Client) => {
   console.log(`Ready! Logged in as ${readyClient.user?.tag}`)
 })
 
-client.login(TOKEN)
+client.login(DISCORD_TOKEN)
 
 client.on('guildCreate', async (guild) => {
   await deployCommands(guild)

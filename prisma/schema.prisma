@@ -34,11 +34,12 @@ enum Size {
 }
 
 model Guild {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  guildId     String    @unique
-  description String?
-  homeBrew    HomeBrew? @relation("GuildHomeBrew")
+  id                 String               @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  guildId            String               @unique
+  description        String?
+  homeBrew           HomeBrew?            @relation("GuildHomeBrew")
+  customEventDiscord CustomEventDiscord[] @relation("GuildCustomEventDiscord")
 }
 
 model HomeBrew {
@@ -134,4 +135,14 @@ model Role {
   proficiencies String[]
   savingThrows  String[]
   skills        String[]
+}
+
+model CustomEventDiscord {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  guild        Guild  @relation("GuildCustomEventDiscord", fields: [guildId], references: [id])
+  guildId      String @unique @db.ObjectId
+  kitsuneVotes Int
+  yokaiVotes   Int
+  total        Int
 }
