@@ -1,4 +1,4 @@
-import { Guild, Prisma } from '@prisma/client'
+import { CustomEventDiscord, Guild, Prisma } from '@prisma/client'
 import { prisma } from '../../lib/prisma'
 import { GuildRepository } from '../guildRepository'
 
@@ -22,10 +22,15 @@ export class PrismaGuildRepository implements GuildRepository {
     return guild
   }
 
-  async findByGuildId(guildId: string): Promise<Guild | null> {
+  async findByGuildId(
+    guildId: string,
+  ): Promise<(Guild & { customEventDiscord: CustomEventDiscord[] }) | null> {
     const guild = await prisma.guild.findUnique({
       where: {
         guildId,
+      },
+      include: {
+        customEventDiscord: true,
       },
     })
 
