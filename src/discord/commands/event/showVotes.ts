@@ -54,7 +54,12 @@ export class ShowVotesCommand extends Command<string> {
 
         this.data = event
 
-        return interaction.reply({ embeds: this.buildEmbed() })
+        const { attachment, name } = this.getEventImage()
+
+        return interaction.reply({
+          embeds: this.buildEmbed(),
+          files: [{ attachment, name }],
+        })
       },
     }
   }
@@ -62,15 +67,16 @@ export class ShowVotesCommand extends Command<string> {
   public buildEmbed(): EmbedBuilder[] {
     const embedVotes = new EmbedBuilder()
       .setColor('DarkBlue')
-      .setTitle('Votes')
-      .setDescription(`Number of votes`)
-      .addFields({ name: 'Total votes', value: this.data.total.toString() })
+      .setTitle('CONTAGEM')
+      .setThumbnail('attachment://october.jpeg')
+      .setDescription(`Contagem de pontos do evento de Outubro`)
+      .addFields({ name: 'Contagem total:', value: this.data.total.toString() })
       .addFields({
-        name: 'Kitsune votes',
+        name: ':cherry_blossom: Pétalas :cherry_blossom:',
         value: this.data.kitsuneVotes.toString(),
       })
       .addFields({
-        name: 'Yokai votes',
+        name: ':drop_of_blood: Lágrimas :drop_of_blood:',
         value: this.data.yokaiVotes.toString(),
       })
 
@@ -81,5 +87,12 @@ export class ShowVotesCommand extends Command<string> {
     return new SlashCommandBuilder()
       .setName(this.name?.toLowerCase() ?? '')
       .setDescription('Show total of votes !')
+  }
+
+  public getEventImage(): { attachment: string; name: string } {
+    return {
+      attachment: `src/assets/event/october.jpeg`,
+      name: 'october.jpeg',
+    }
   }
 }
