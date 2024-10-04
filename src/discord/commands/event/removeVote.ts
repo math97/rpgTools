@@ -2,6 +2,7 @@ import { Command as CommandType } from '@/models/Command'
 import {
   CommandInteraction,
   InteractionResponse,
+  PermissionFlagsBits,
   SlashCommandBuilder,
   SlashCommandOptionsOnlyBuilder,
 } from 'discord.js'
@@ -90,5 +91,6 @@ export class RemoveVoteCommand extends Command<string> {
           .setDescription('How many votes?')
           .setRequired(true),
       )
+      .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
   }
 }
