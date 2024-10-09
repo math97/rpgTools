@@ -1,8 +1,8 @@
 import { Commands } from '@/discord/commands'
 import { REST, Routes } from 'discord.js'
-import 'dotenv/config'
+import { env } from '../env'
 
-const { CLIENT_ID, TOKEN, GUILD_ID } = process.env
+const { CLIENT_ID, TOKEN, GUILD_ID } = env
 
 if (!TOKEN) throw new Error('Variable missing')
 

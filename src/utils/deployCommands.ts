@@ -1,8 +1,9 @@
 import { REST, Routes, Guild } from 'discord.js'
 import { Commands } from '@/discord/commands'
+import { env } from '../env'
 
 export async function deployCommands(guild: Guild) {
-  const { CLIENT_ID, TOKEN } = process.env
+  const { CLIENT_ID, TOKEN } = env
 
   const commandsData = Object.values(Commands.list).map(
     (command) => command.data,
