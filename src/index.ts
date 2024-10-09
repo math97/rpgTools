@@ -11,7 +11,8 @@ import { deployCommands } from './utils/deployCommands'
 
 import { Commands } from './discord/commands'
 import { RegisterGuildController } from './controllers/registerGuildController'
-const { TOKEN } = process.env
+import { env } from './env'
+const { TOKEN } = env
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 const registerGuildController = new RegisterGuildController()
